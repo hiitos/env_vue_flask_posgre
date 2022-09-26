@@ -28,7 +28,6 @@ def random():
         'randomNum': randint(1,100)
     }
     return jsonify(response)
-    # return "<p>Hello, World!</p>"
 
 # app.run(host, port)：hostとportを指定してflaskサーバを起動
 if __name__ == '__main__':
