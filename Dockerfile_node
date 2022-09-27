@@ -3,3 +3,4 @@ FROM node:16.13.0
 WORKDIR /usr/src/app
 
 RUN yarn global add @vue/cli && yarn global add @vue/cli-init
+RUN npm install axios
