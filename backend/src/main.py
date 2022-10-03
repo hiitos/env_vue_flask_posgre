@@ -7,6 +7,7 @@ from flask_cors import CORS
 # api.pyのファイル読み込み　（register_blueprintで使う）
 # GET POSTとか書いてる
 from api import api_bp
+from random import *
 
 # static_folder：vueでビルドした静的ファイルのパスを指定
 # template_folder：vueでビルドしたindex.htmlのパスを指定
@@ -22,6 +23,14 @@ CORS(app)
 # vueの画面にレンダリング
 def index(path):
     return render_template('index.html')
+
+# '/rand'が叩かれた時、乱数を生成
+@app.route('/rand')
+def random():
+    response = {
+        'randomNum': randint(1,4)
+    }
+    return jsonify(response)
 
 # app.run(host, port)：hostとportを指定してflaskサーバを起動
 if __name__ == '__main__':
