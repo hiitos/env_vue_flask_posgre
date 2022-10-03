@@ -4,3 +4,8 @@ WORKDIR /usr/src/app
 
 RUN pip install flask
 RUN pip install flask-cors
+RUN pip install mysql
+RUN pip install mysql-connector-python
+
+WORKDIR /usr/src/app/backend
+CMD python backend/src/main.py

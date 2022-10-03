@@ -28,7 +28,7 @@ export default {
     },
     getRandomNum () {
       console.log(888)
-      const path = 'http://localhost:9000/rand'
+      const path = 'http://localhost:9000/account/search'
       axios.get(path)
         .then(response => {
           this.randomNum = response.data.randomNum

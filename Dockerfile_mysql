@@ -1,0 +1,11 @@
+# FROM mysql:latest
+FROM mysql:5.7
+
+# RUN chmod 644 /etc/mysql/my.cnf
+# CMD ["mysqld"]
+
+# RUN apt-get update \
+#  && apt-get install -y --no-install-recommends \
+#     vim \
+#  && apt-get -y clean \
+#  && rm -rf /var/lib/apt/lists/*
