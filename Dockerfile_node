@@ -4,3 +4,7 @@ WORKDIR /usr/src/app
 
 RUN yarn global add @vue/cli && yarn global add @vue/cli-init
 RUN npm install axios
+
+WORKDIR /usr/src/app/frontend
+CMD npm run build
+CMD npm run dev

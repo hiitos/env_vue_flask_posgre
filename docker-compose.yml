@@ -4,12 +4,16 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile_python
+    image: flask_img
     container_name: flask_container
     tty: true
     volumes:
       - ./:/usr/src/app
     ports:
       - "9000:80"
+    networks:
+      - main-network
+
   vue:
     build:
       context: .
@@ -21,3 +25,47 @@ services:
       - ./:/usr/src/app
     ports:
       - "8080:8080"
+    networks:
+      - main-network
+  
+  db:
+    # Dockerfileの置き場所を指定
+    build:
+      context: .
+      dockerfile: Dockerfile_mysql
+    restart: always
+    image: mysql:5.7 # mysql:latest
+    container_name: db_container
+    platform: linux/amd64
+    environment:
+    # 後で.envにかく
+      - MYSQL_DATABASE=work_db
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=password
+      
+      #rootパスワード
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_RANDOM_ROOT_PASSWORD=no
+
+      - TZ=Asia/Tokyo
+    env_file: ./backend/src/model/.env
+    volumes:
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./log/mysql:/var/log/mysql
+    healthcheck:
+      test: exit 0
+      start_period: 10s
+      retries: 3
+      interval: 10s
+      timeout: 10s
+    ports:
+      - 3506:3306
+    networks:
+      - main-network
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+networks:
+  main-network:
+    driver: bridge
