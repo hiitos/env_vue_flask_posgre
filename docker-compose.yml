@@ -49,6 +49,7 @@ services:
       - MYSQL_RANDOM_ROOT_PASSWORD=no
 
       - TZ=Asia/Tokyo
+    env_file: ./backend/src/model/.env
     volumes:
       - ./mysql/initdb.d:/docker-entrypoint-initdb.d
       - ./mysql/conf.d:/etc/mysql/conf.d

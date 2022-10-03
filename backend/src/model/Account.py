@@ -87,6 +87,7 @@ def getByList(arr):
 
 # get all mydata record
 def getAll():
+    # セッションの確立
     Session = sessionmaker(bind=engine)
     ses = Session()
     res = ses.query(Account).all()
